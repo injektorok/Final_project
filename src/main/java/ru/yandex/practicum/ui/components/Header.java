@@ -13,12 +13,14 @@ import static com.codeborne.selenide.Selenide.page;
 
 public class Header {
 
+    private final By doskaMainButtonSelector = By.xpath("//div[contains(@class, 'header_shell')]");
     private final By loginAndRegisterButtonSelector = By.xpath("//button[text()='Вход и регистрация']");
     private final By profileButtonSelector = By.cssSelector("button.circleSmall");
     private final By userNameSelector = By.cssSelector(".profileText.name");
     private final By logoutButtonSelector = By.xpath("//button[text()='Выйти']");
     private final By createAdButtonSelector = By.xpath("//button[text()='Разместить объявление']");
 
+    private final SelenideElement doskaMainButton = $(doskaMainButtonSelector);
     private final SelenideElement loginAndRegisterButton = $(loginAndRegisterButtonSelector);
     private final SelenideElement profileButton = $(profileButtonSelector);
     private final SelenideElement userNameLabel = $(userNameSelector);
@@ -43,6 +45,12 @@ public class Header {
 
     public HomePage clickLogoutButton() {
         logoutButton.click();
+        HomePage homePage = page(HomePage.class);
+        return homePage;
+    }
+
+    public HomePage clickMainButton() {
+        doskaMainButton.click();
         HomePage homePage = page(HomePage.class);
         return homePage;
     }

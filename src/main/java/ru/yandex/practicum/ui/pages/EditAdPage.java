@@ -13,8 +13,10 @@ import static com.codeborne.selenide.Selenide.open;
 public class EditAdPage {
 
     private final By titleSelector = By.cssSelector(".createListing_title__IFtFs");
+    private final By deleteButtonSelector = By.xpath("//button[text() = \"Удалить\"]");
 
     private final SelenideElement titleLabel = $(titleSelector);
+    private final SelenideElement deleteButtonElement = $(deleteButtonSelector);
 
     private Header header;
 
@@ -33,6 +35,14 @@ public class EditAdPage {
 
     public EditAdPage shouldHaveTitle(String expectedTitle) {
         titleLabel.shouldBe(visible).shouldHave(text(expectedTitle));
+        return this;
+    }
+
+    public EditAdPage shouldHaveDeleteButton() {
+        if (!deleteButtonElement.exists()) {
+            throw new AssertionError("Кнопка удаления не найдена на карточке объявления");
+        }
+        deleteButtonElement.shouldBe(visible.because("Кнопка удаления должна быть видима"));
         return this;
     }
 }

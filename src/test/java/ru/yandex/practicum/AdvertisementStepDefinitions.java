@@ -5,7 +5,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import ru.yandex.practicum.api.utils.DataHelper;
 import ru.yandex.practicum.ui.components.AdCard;
-import ru.yandex.practicum.ui.pages.ProfilePage;
+import ru.yandex.practicum.ui.pages.EditAdPage;
+import ru.yandex.practicum.ui.pages.HomePage;
 
 public class AdvertisementStepDefinitions {
 
@@ -43,39 +44,42 @@ public class AdvertisementStepDefinitions {
 
     @When("Пользователь редактирует объявление")
     public void userEditsAd() {
-        ProfilePage profilePage = context.homePage.getHeader()
-                .shouldBeAuthorized()
-                .clickProfileButton();
-        profilePage.shouldHaveAdvertisements();
-        AdCard firstAd =  profilePage.getAllAdvertisements().get(0);
+        HomePage homePage = context.homePage.getHeader()
+                .shouldBeAuthorized().clickMainButton();
+        homePage.shouldHaveAdvertisements();
+
+        // поиск созданного объявления
+        homePage.findCreatedAdvertisement(context.createdAd.getName());
+
+        AdCard firstAd =  homePage.getAllAdvertisements().get(0);
         firstAd.shouldHaveEditButton();
         context.editAdPage = firstAd.editAd();
     }
 
     @When("Пользователь просматривает свои объявления")
     public void userViewsAds() {
-        context.profilePage = context.homePage.getHeader()
-                .shouldBeAuthorized()
-                .clickProfileButton();
+        HomePage homePage = context.homePage.getHeader()
+                .shouldBeAuthorized().clickMainButton();
+        homePage.shouldHaveAdvertisements();
+
+        // поиск созданного объявления
+        homePage.findCreatedAdvertisement(context.createdAd.getName());
     }
 
     @Then("Объявление отображается в его профиле")
     public void adDisplayedInProfile() {
-        context.profilePage.shouldHaveAdvertisements();
+        context.homePage.shouldHaveAdvertisements();
     }
 
     @Then("Форма редактирования объявления открывается")
     public void editAdFormOpens() {
-        context.editAdPage.shouldHaveTitle("Редактирование объявления");
+        context.editAdPage.shouldHaveTitle("Редактировать объявление");
     }
 
     @Then("У объявления доступна кнопка удаления")
     public void deleteButtonAvailable() {
-        ProfilePage profilePage = context.homePage.getHeader()
-                .shouldBeAuthorized()
-                .clickProfileButton();
-        profilePage.shouldHaveAdvertisements();
-        AdCard firstAd =  profilePage.getAllAdvertisements().get(0);
-        firstAd.shouldHaveDeleteButton();
+        // проверка кнопки удаления
+        EditAdPage editAd = context.homePage.clickCard();
+        editAd.shouldHaveDeleteButton();
     }
 }
