@@ -52,7 +52,7 @@ public class CreateAdPage {
     }
 
     public HomePage createAd(CreateAdRequest ad) {
-        setName(ad.getName());
+        setName(ad.getName() + ad.getPrice());
         setDescription(ad.getDescription());
         setPrice(ad.getPrice());
         clickPublishButton();

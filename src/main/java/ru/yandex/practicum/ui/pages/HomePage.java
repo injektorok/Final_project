@@ -5,9 +5,11 @@ import ru.yandex.practicum.constants.Urls;
 import ru.yandex.practicum.ui.components.AdCard;
 import ru.yandex.practicum.ui.components.Header;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.codeborne.selenide.ClickOptions.usingDefaultMethod;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -15,6 +17,7 @@ public class HomePage {
 
     private final By findAdInputSelector = By.xpath("//input[contains(@class, 'input_inputStandart') and @placeholder = 'Я хочу купить...']");
     private final By applyButtonSelector = By.xpath("//button[text() = 'Применить']");
+    private final By priceInputSelector = By.xpath("//input[@name = \"price\"]");
     private final By advertisementsSelector = By.cssSelector(".card");
     private final By firstCardSelector = By.xpath("//div[@class = \"card\"][1]");
 
@@ -45,9 +48,10 @@ public class HomePage {
         return this;
     }
 
-    public HomePage findCreatedAdvertisement(String name) {
+    public HomePage findCreatedAdvertisement(String name, int price) {
         $(findAdInputSelector).sendKeys(name);
-        $(applyButtonSelector).click();
+        $(priceInputSelector).sendKeys(String.valueOf(price));
+        $(applyButtonSelector).click(usingDefaultMethod().timeout(Duration.ofSeconds(8)));
 
         return this;
     }

@@ -49,8 +49,9 @@ public class AdvertisementStepDefinitions {
         homePage.shouldHaveAdvertisements();
 
         // поиск созданного объявления
-        homePage.findCreatedAdvertisement(context.createdAd.getName());
+        homePage.findCreatedAdvertisement(context.createdAd.getName() + context.createdAd.getPrice(), context.createdAd.getPrice());
 
+        homePage.shouldHaveAdvertisements();
         AdCard firstAd =  homePage.getAllAdvertisements().get(0);
         firstAd.shouldHaveEditButton();
         context.editAdPage = firstAd.editAd();
@@ -63,7 +64,7 @@ public class AdvertisementStepDefinitions {
         homePage.shouldHaveAdvertisements();
 
         // поиск созданного объявления
-        homePage.findCreatedAdvertisement(context.createdAd.getName());
+        homePage.findCreatedAdvertisement(context.createdAd.getName() + context.createdAd.getPrice(), context.createdAd.getPrice());
     }
 
     @Then("Объявление отображается в его профиле")

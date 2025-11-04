@@ -1,9 +1,12 @@
 package ru.yandex.practicum.ui.pages;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import ru.yandex.practicum.constants.Urls;
 import ru.yandex.practicum.ui.components.Header;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -39,9 +42,13 @@ public class EditAdPage {
     }
 
     public EditAdPage shouldHaveDeleteButton() {
-        if (!deleteButtonElement.exists()) {
-            throw new AssertionError("Кнопка удаления не найдена на карточке объявления");
+        try {
+            deleteButtonElement.shouldBe(Condition.exist, Duration.ofSeconds(5));
+            System.out.println("Кнопка удаления найдена");
+        } catch (Exception e) {
+            System.out.println("Кнопка удаления не найдена на карточке объявления");
         }
+
         deleteButtonElement.shouldBe(visible.because("Кнопка удаления должна быть видима"));
         return this;
     }
