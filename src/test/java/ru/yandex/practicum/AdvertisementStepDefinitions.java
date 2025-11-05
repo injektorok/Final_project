@@ -3,10 +3,14 @@ package ru.yandex.practicum;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Timeout;
 import ru.yandex.practicum.api.utils.DataHelper;
 import ru.yandex.practicum.ui.components.AdCard;
 import ru.yandex.practicum.ui.pages.EditAdPage;
 import ru.yandex.practicum.ui.pages.HomePage;
+
+import java.util.List;
 
 public class AdvertisementStepDefinitions {
 
@@ -50,9 +54,12 @@ public class AdvertisementStepDefinitions {
 
         // поиск созданного объявления
         homePage.findCreatedAdvertisement(context.createdAd.getName() + context.createdAd.getPrice(), context.createdAd.getPrice());
-
         homePage.shouldHaveAdvertisements();
-        AdCard firstAd =  homePage.getAllAdvertisements().get(0);
+
+        List<AdCard> filteredList = homePage.getAllAdvertisements();
+        Assertions.assertEquals(1, filteredList.size(), "Количество найденных объявлений не уникально!");
+
+        AdCard firstAd = homePage.getAllAdvertisements().get(0);
         firstAd.shouldHaveEditButton();
         context.editAdPage = firstAd.editAd();
     }
@@ -65,6 +72,9 @@ public class AdvertisementStepDefinitions {
 
         // поиск созданного объявления
         homePage.findCreatedAdvertisement(context.createdAd.getName() + context.createdAd.getPrice(), context.createdAd.getPrice());
+        
+        List<AdCard> filteredList = homePage.getAllAdvertisements();
+        Assertions.assertEquals(1, filteredList.size(), "Количество найденных объявлений не уникально!");
     }
 
     @Then("Объявление отображается в его профиле")
