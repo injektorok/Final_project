@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.codeborne.selenide.ClickOptions.usingDefaultMethod;
-import static com.codeborne.selenide.ClickOptions.withTimeout;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 

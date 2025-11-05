@@ -4,7 +4,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Timeout;
 import ru.yandex.practicum.api.utils.DataHelper;
 import ru.yandex.practicum.ui.components.AdCard;
 import ru.yandex.practicum.ui.pages.EditAdPage;
