@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","2695","Успешная авторизация","","","passed","","","ru.yandex.practicum.RunCucumberTest","Авторизация пользователя",""
+"","2778","Успешная регистрация с уникальным email","","","passed","","","ru.yandex.practicum.RunCucumberTest","Регистрация пользователя",""
+"","2786","Неуспешная регистрация с уже существующими данными","","","passed","","","ru.yandex.practicum.RunCucumberTest","Регистрация пользователя",""
+"","10011","Успешное создание объявления","","","passed","","","ru.yandex.practicum.RunCucumberTest","Управление объявлениями",""
+"","14959","Успешное редактирование объявления","","","failed","","","ru.yandex.practicum.RunCucumberTest","Управление объявлениями",""
+"","4385","Успешное удаление объявления","","","failed","","","ru.yandex.practicum.RunCucumberTest","Управление объявлениями",""
